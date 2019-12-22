@@ -2,4 +2,11 @@
     <string name="app_name">TopMovies</string>
     <string name="title_text">Mad Max: Fury Road</string>
     <string name="release_date">May 13, 2015</string>
+    <string name="overview_madmax">An apocalyptic story set in the furthest reaches of our planet,
+        in a stark desert landscape where humanity is broken,
+        and most everyone is crazed fighting for the necessities of life.
+        Within this world exist two rebels on the run who just might be able to restore order.</string>
+    <string name="rating_madmax">6.8</string>
+    <string name="schedule_viewing">Schedule viewing</string>
+    <string name="poster">poster</string>
 </resources>

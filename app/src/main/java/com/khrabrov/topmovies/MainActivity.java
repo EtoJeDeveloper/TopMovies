@@ -5,6 +5,9 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
+import android.widget.TextView;
+
 import com.khrabrov.topmovies.Adapter.MovieAdapter;
 import com.khrabrov.topmovies.Model.MoviePage;
 import com.khrabrov.topmovies.Model.Result;
@@ -37,8 +40,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<MoviePage> call, Response<MoviePage> response) {
                 MoviePage moviePage = response.body();
-                List<Result> listOfMovies = moviePage.getResults();
+                List<Result> listOfMovies = null;
+                if (moviePage != null) {
+                    listOfMovies = moviePage.getResults();
+                }
                 recyclerView.setAdapter(new MovieAdapter(listOfMovies));
+
             }
 
             @Override
@@ -46,5 +53,7 @@ public class MainActivity extends AppCompatActivity {
                 t.printStackTrace();
             }
         });
+
+
     }
 }

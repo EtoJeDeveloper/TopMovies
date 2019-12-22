@@ -16,46 +16,98 @@
             android:id="@+id/poster"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/poster_example" />
+            android:src="@drawable/poster_example"
+            android:contentDescription="@string/poster" />
+
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp">
-
-            <TextView
-                android:id="@+id/average_vote"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="6.8"
-                android:textSize="30sp"
-                android:textColor="@color/primaryDarkColor"/>
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:orientation="vertical">
+                android:padding="10dp">
 
                 <TextView
-                    android:id="@+id/text_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textSize="15sp"
-                    android:text="@string/title_text"
-                    android:textStyle="bold"/>
-
-                <TextView
-                    android:id="@+id/release_date"
-                    android:layout_width="match_parent"
+                    android:id="@+id/average_vote"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/release_date"/>
+                    android:text="@string/rating_madmax"
+                    android:textSize="30sp"
+                    android:textColor="@color/primaryDarkColor"/>
 
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:orientation="vertical">
 
+                    <TextView
+                        android:id="@+id/text_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textSize="15sp"
+                        android:text="@string/title_text"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/release_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/release_date"/>
+                </LinearLayout>
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp">
+
+                    <TextView
+                        android:id="@+id/overview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:scrollbars="vertical"
+                        android:maxLines="7"
+                        android:textSize="13sp"
+                        android:text="@string/overview_madmax"/>
+                </ScrollView>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:gravity="bottom"
+                    android:orientation="vertical">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/primaryDarkColor"
+                        android:layout_marginBottom="5dp"
+                        android:gravity="bottom" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="bottom"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginStart="8dp"
+                        android:textStyle="bold"
+                        android:text="@string/schedule_viewing"/>
+                </LinearLayout>
+
+            </LinearLayout>
         </LinearLayout>
-
     </LinearLayout>
 </androidx.cardview.widget.CardView>
