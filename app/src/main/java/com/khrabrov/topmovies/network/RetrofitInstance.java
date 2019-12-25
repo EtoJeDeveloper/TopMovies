@@ -1,4 +1,4 @@
-package com.khrabrov.topmovies.Network;
+package com.khrabrov.topmovies.network;
 
 import android.content.Context;
 

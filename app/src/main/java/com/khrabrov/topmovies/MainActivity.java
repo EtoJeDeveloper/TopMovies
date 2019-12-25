@@ -2,17 +2,10 @@ package com.khrabrov.topmovies;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Notification;
-import android.app.ProgressDialog;
 import android.graphics.Color;
-import android.graphics.ColorFilter;
-import android.graphics.ColorMatrix;
-import android.graphics.ColorMatrixColorFilter;
-import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.View;
@@ -20,12 +13,13 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
 import com.google.android.material.snackbar.Snackbar;
-import com.khrabrov.topmovies.Adapter.MovieAdapter;
-import com.khrabrov.topmovies.Model.MoviePage;
-import com.khrabrov.topmovies.Model.Result;
-import com.khrabrov.topmovies.Network.GetMovieDataService;
-import com.khrabrov.topmovies.Network.NetworkConnectionInterceptor;
-import com.khrabrov.topmovies.Network.RetrofitInstance;
+import com.khrabrov.topmovies.adapter.MovieAdapter;
+import com.khrabrov.topmovies.model.MoviePage;
+import com.khrabrov.topmovies.model.MoviePageResult;
+import com.khrabrov.topmovies.network.GetMovieDataService;
+import com.khrabrov.topmovies.network.NetworkConnectionInterceptor;
+import com.khrabrov.topmovies.network.RetrofitInstance;
+
 import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -37,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private static String LANGUAGE = "en-US";
     private LinearLayout linear;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
         linear = findViewById(R.id.linear);
 
-        //Замета цвета progressBar, устарел с API 29.
+        //Замета цвета progressBar
         ProgressBar progressBar = findViewById(R.id.progress_bar);
         progressBar.getIndeterminateDrawable().setColorFilter(Color.parseColor("#b1bfca"), PorterDuff.Mode.SRC_IN);
 
@@ -62,10 +57,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<MoviePage> call, Response<MoviePage> response) {
                 MoviePage moviePage = response.body();
-                List<Result> listOfMovies = null;
+                List<MoviePageResult> listOfMovies = null;
                 if (moviePage != null) {
                     listOfMovies = moviePage.getResults();
                 }
+
                 recyclerView.setAdapter(new MovieAdapter(listOfMovies));
                 progressBar.setVisibility(View.GONE);
             }
@@ -78,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
 
     }
 }

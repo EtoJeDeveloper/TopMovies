@@ -1,9 +1,8 @@
-package com.khrabrov.topmovies.Network;
+package com.khrabrov.topmovies.network;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.util.Log;
 
 import java.io.IOException;
 
@@ -23,7 +22,6 @@ public class NetworkConnectionInterceptor implements Interceptor {
     public Response intercept(Chain chain) throws IOException {
         if (!isConnected()) {
             throw new NoConnectivityException();
-            // Throwing our custom exception 'NoConnectivityException'
         }
 
         Request.Builder builder = chain.request().newBuilder();
@@ -32,7 +30,10 @@ public class NetworkConnectionInterceptor implements Interceptor {
 
     public boolean isConnected(){
         ConnectivityManager connectivityManager = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo netInfo = connectivityManager.getActiveNetworkInfo();
+        NetworkInfo netInfo = null;
+        if (connectivityManager != null) {
+            netInfo = connectivityManager.getActiveNetworkInfo();
+        }
         return (netInfo != null && netInfo.isConnected());
     }
 
@@ -40,7 +41,6 @@ public class NetworkConnectionInterceptor implements Interceptor {
         @Override
         public String getMessage() {
             return "No Internet Connection";
-
         }
     }
 }

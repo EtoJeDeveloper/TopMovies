@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cardView"
     android:layout_margin="8dp">
 
@@ -42,7 +43,8 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/text_view"
+                        android:id="@+id/movie_name"
+                        android:textIsSelectable="true"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:textSize="15sp"
@@ -51,6 +53,7 @@
 
                     <TextView
                         android:id="@+id/release_date"
+                        android:textIsSelectable="true"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/release_date"/>
@@ -77,6 +80,7 @@
                         android:maxLines="7"
                         android:textSize="13sp"
                         android:text="@string/overview_madmax"/>
+
                 </ScrollView>
 
                 <LinearLayout
@@ -94,15 +98,18 @@
                         android:gravity="bottom" />
 
                     <TextView
+                        android:id="@+id/schedule"
+                        android:clickable="true"
+                        android:focusable="true"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="bottom"
                         android:layout_marginBottom="5dp"
                         android:layout_marginStart="8dp"
                         android:textStyle="bold"
-                        android:text="@string/schedule_viewing"/>
+                        android:text="@string/schedule_viewing" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>

@@ -1,4 +1,4 @@
-package com.khrabrov.topmovies.Model;
+package com.khrabrov.topmovies.model;
 
 import java.io.Serializable;
 import java.util.List;
@@ -19,7 +19,7 @@ public class MoviePage implements Serializable
     private Integer totalPages;
     @SerializedName("results")
     @Expose
-    private List<Result> results = null;
+    private List<MoviePageResult> results = null;
     private final static long serialVersionUID = 8310404394849346563L;
 
     public Integer getPage() {
@@ -46,11 +46,11 @@ public class MoviePage implements Serializable
         this.totalPages = totalPages;
     }
 
-    public List<Result> getResults() {
+    public List<MoviePageResult> getResults() {
         return results;
     }
 
-    public void setResults(List<Result> results) {
+    public void setResults(List<MoviePageResult> results) {
         this.results = results;
     }
 

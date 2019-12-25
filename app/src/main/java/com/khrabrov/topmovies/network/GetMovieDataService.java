@@ -1,7 +1,7 @@
-package com.khrabrov.topmovies.Network;
+package com.khrabrov.topmovies.network;
 
 
-import com.khrabrov.topmovies.Model.MoviePage;
+import com.khrabrov.topmovies.model.MoviePage;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
