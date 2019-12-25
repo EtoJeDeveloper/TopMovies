@@ -5,7 +5,6 @@ import android.app.AlarmManager;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.view.LayoutInflater;
@@ -24,7 +23,9 @@ import com.khrabrov.topmovies.R;
 import com.squareup.picasso.Picasso;
 import java.text.DateFormat;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static android.content.Context.ALARM_SERVICE;
 
@@ -43,6 +44,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         private TextView dateRelease;
         private TextView overView;
         private TextView schedule;
+        private Map<String, Integer> scheduleMap = new HashMap<>();
         private CardView cardView;
 
         @SuppressLint("ClickableViewAccessibility")
@@ -63,8 +65,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
             });
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                CharSequence name = "TestChannel";
-                String description = "Channel for test";
+                CharSequence name = "Movie";
+                String description = "Viewing movie";
                 int importance = NotificationManager.IMPORTANCE_DEFAULT;
                 NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
                 channel.setDescription(description);
@@ -80,30 +82,31 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
                         mCalendar.set(Calendar.YEAR, year);
                         mCalendar.set(Calendar.MONTH, monthOfYear);
                         mCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                        mCalendar.set(Calendar.HOUR_OF_DAY, 0);
+                        mCalendar.set(Calendar.MINUTE, 0);
+                        mCalendar.set(Calendar.SECOND, 0);
                         String date = DateFormat.getDateInstance(DateFormat.MEDIUM).format(mCalendar.getTime());
 
 //                        Сообщение о назначенной дате
                         Snackbar.make(cardView, "Viewing scheduled for " + date, Snackbar.LENGTH_LONG).show();
 
+//                        Установка напоминания
                         Intent intent = new Intent(itemView.getContext(), RemainderBroadcast.class);
-                        // intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         PendingIntent pendingIntent = PendingIntent.getBroadcast(itemView.getContext(), 0, intent, 0);
+
                         AlarmManager alarmManager = (AlarmManager)itemView.getContext().getSystemService(
                                 ALARM_SERVICE);
-                        alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()+ 1000, pendingIntent);
 
+                        alarmManager.set(AlarmManager.RTC_WAKEUP, mCalendar.getTimeInMillis(), pendingIntent);
                     }, mCalendar.get(Calendar.YEAR), mCalendar.get(Calendar.MONTH), mCalendar.get(Calendar.DAY_OF_MONTH));
             calendarDialogFragment.getDatePicker().setMinDate(mCalendar.getTimeInMillis());
 
             schedule.setOnClickListener(v ->
                     calendarDialogFragment.show());
-
         }
     }
 
-    private Context context;
     private List<MoviePageResult> listOfMovies;
-
     public MovieAdapter(List<MoviePageResult> listOfMovies) {
         this.listOfMovies = listOfMovies;
     }
@@ -124,6 +127,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         holder.averageVote.setText(listOfMovies.get(position).getVoteAverage().toString());
         holder.dateRelease.setText(listOfMovies.get(position).getReleaseDate());
         holder.overView.setText(listOfMovies.get(position).getOverview());
+
         MovieAdapter.setMovieName(listOfMovies.get(position).getTitle());
 
         try {

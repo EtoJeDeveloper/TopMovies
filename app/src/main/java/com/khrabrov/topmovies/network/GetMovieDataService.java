@@ -1,6 +1,5 @@
 package com.khrabrov.topmovies.network;
 
-
 import com.khrabrov.topmovies.model.MoviePage;
 
 import retrofit2.Call;
